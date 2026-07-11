@@ -40,7 +40,7 @@
   /* ---------- nav ---------- */
   nav{
     position:fixed;top:0;left:0;right:0;z-index:30;
-    height:var(--nav-h);
+    height:calc(var(--nav-h) + env(safe-area-inset-top));
     display:flex;justify-content:space-between;align-items:center;
     padding:0 1.4rem;
     padding-top:env(safe-area-inset-top);
@@ -82,7 +82,7 @@
   /* ---------- hero (statement tab) ---------- */
   .hero{
     position:relative;
-    margin-top:var(--nav-h);
+    margin-top:calc(var(--nav-h) + env(safe-area-inset-top));
     min-height:78svh;
     display:flex;flex-direction:column;justify-content:center;align-items:center;
     text-align:center;padding:3rem 1.5rem;
@@ -120,6 +120,7 @@
     font-size:clamp(1.7rem,6.4vw,4.1rem);
     letter-spacing:.16em;line-height:1.28;
     max-width:16ch;
+    overflow-wrap:break-word;
   }
   .hero h1 .hash{color:var(--blush)}
   .hero .rule{
@@ -175,7 +176,7 @@
   }
 
   /* ---------- gallery ---------- */
-  #gallery{padding-top:calc(var(--nav-h) + 3rem)}
+  #gallery{padding-top:calc(var(--nav-h) + env(safe-area-inset-top) + 3rem)}
   .gallery-intro{padding-bottom:0}
   .work{
     max-width:860px;margin:0 auto;padding:4rem 0;
@@ -239,7 +240,7 @@
   @media(max-width:640px){
     body{font-size:16.5px}
     section{padding:3.5rem 1.1rem}
-    #gallery{padding-top:calc(var(--nav-h) + 2rem)}
+    #gallery{padding-top:calc(var(--nav-h) + env(safe-area-inset-top) + 2rem)}
     .work{padding:2.8rem 0}
     .work figcaption{grid-template-columns:1fr}
     .work .swatch{margin-top:.4rem}
@@ -275,7 +276,7 @@
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-content">
       <p class="eyebrow">Beverly Art Walk</p>
-      <h1><span class="hash">#</span>The&nbsp;Matriarchy Is&nbsp;Strong</h1>
+      <h1><span class="hash">#</span>The Matriarchy Is&nbsp;Strong</h1>
       <div class="rule" aria-hidden="true"></div>
       <p class="byline">Sara A. Houlihan</p>
       <p class="venue">An on-going multidisciplinary art series</p>
