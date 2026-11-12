@@ -1,0 +1,311 @@
+  :root{
+    --paper:#F9F1EE;
+    --rose:#F4DBDB;
+    --blush:#F4BAC8;
+    --ink:#2B2325;
+    --ink-soft:#6E6062;
+    --carmine:#CE101D;
+    --hairline:rgba(43,35,37,.16);
+    --measure:62ch;
+    --nav-h:60px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  html,body{overflow-x:hidden;width:100%}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Cormorant Garamond',serif;
+    font-size:19px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%}
+  ::selection{background:var(--blush);color:var(--ink)}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:30;
+    height:calc(var(--nav-h) + env(safe-area-inset-top));
+    display:flex;justify-content:space-between;align-items:center;
+    padding:0 1.4rem;
+    padding-top:env(safe-area-inset-top);
+    background:color-mix(in srgb, var(--paper) 90%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--hairline);
+  }
+  nav .mark{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--ink);text-decoration:none;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;
+  }
+  nav .mark em{font-style:normal;color:var(--carmine)}
+  .tabs{display:flex;gap:.4rem;list-style:none;flex:none}
+  .tabs button{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink-soft);background:none;border:none;cursor:pointer;
+    padding:.6rem .9rem;border-radius:999px;
+    -webkit-tap-highlight-color:transparent;
+    transition:color .25s,background .25s;
+    min-height:38px;
+  }
+  .tabs button.active{color:var(--paper);background:var(--ink)}
+  .tabs button:not(.active):hover,.tabs button:not(.active):focus-visible{color:var(--carmine)}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--carmine);outline-offset:3px}
+  @media(max-width:640px){
+    nav{padding:0 .8rem}
+    nav .mark{font-size:.56rem;letter-spacing:.16em;max-width:40vw}
+    .tabs button{font-size:.6rem;letter-spacing:.14em;padding:.55rem .7rem}
+  }
+
+  /* ---------- panels ---------- */
+  .panel{display:none}
+  .panel.active{display:block;animation:panelIn .5s ease}
+  @keyframes panelIn{from{opacity:0}to{opacity:1}}
+
+  /* ---------- hero (statement tab) ---------- */
+  .hero{
+    position:relative;
+    margin-top:calc(var(--nav-h) + env(safe-area-inset-top));
+    min-height:78svh;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;padding:3rem 1.5rem;
+    overflow:hidden;
+    background:var(--ink);
+  }
+  .hero-bg{position:absolute;inset:0;overflow:hidden}
+  .hero-bg-layer{
+    position:absolute;inset:0;
+    background-size:cover;background-position:center;
+    opacity:0;
+    animation:heroFade 45s infinite;
+    will-change:opacity;
+  }
+  @keyframes heroFade{
+    0%{opacity:0}
+    2%{opacity:.82}
+    9%{opacity:.82}
+    12%{opacity:0}
+    100%{opacity:0}
+  }
+  .hero-scrim{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(43,35,37,.28) 0%, rgba(180,24,38,.3) 55%, rgba(43,35,37,.58) 100%);
+  }
+  .hero-content{position:relative;z-index:2;color:#fff}
+  .hero .eyebrow{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    font-size:.7rem;letter-spacing:.42em;text-transform:uppercase;
+    color:rgba(255,255,255,.72);margin-bottom:2.2rem;
+  }
+  .hero h1{
+    font-family:'Josefin Sans',sans-serif;font-weight:200;
+    text-transform:uppercase;
+    font-size:clamp(1.7rem,6.4vw,4.1rem);
+    letter-spacing:.16em;line-height:1.28;
+    max-width:16ch;
+    overflow-wrap:break-word;
+  }
+  .hero h1 .hash{color:var(--blush)}
+  .hero .rule{
+    width:52px;height:1px;background:var(--blush);margin:2.4rem auto;
+  }
+  .hero .byline{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    font-size:.8rem;letter-spacing:.34em;text-transform:uppercase;
+  }
+  .hero .venue{
+    font-style:italic;color:rgba(255,255,255,.78);margin-top:.9rem;font-size:1.05rem;
+  }
+  @media(max-width:640px){
+    .hero{min-height:62svh;padding:2.4rem 1.1rem}
+    .hero .eyebrow{margin-bottom:1.5rem}
+    .hero .rule{margin:1.8rem auto}
+  }
+
+  /* ---------- shared section shell ---------- */
+  section{padding:5.5rem 1.5rem}
+  .shell{max-width:960px;margin:0 auto}
+  .section-label{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    font-size:.68rem;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--carmine);
+    display:flex;align-items:center;gap:1.2rem;margin-bottom:3.4rem;
+  }
+  .section-label::after{content:"";flex:1;height:1px;background:var(--hairline)}
+
+  /* ---------- statement ---------- */
+  #statement-text{background:var(--rose)}
+  .prose{max-width:var(--measure);margin:0 auto}
+  .prose p{margin-bottom:1.5rem}
+  .prose p:last-child{margin-bottom:0}
+  .litany{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    text-transform:uppercase;font-size:.86rem;letter-spacing:.26em;
+    line-height:2.5;margin:2.6rem 0;list-style:none;
+  }
+  .prose ul.plain{margin:1.5rem 0 1.5rem 1.4rem}
+  .affirmation{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    text-transform:uppercase;font-size:.86rem;letter-spacing:.26em;
+    line-height:2.5;margin:2.6rem 0;list-style:none;text-align:center;
+  }
+  .affirmation .hash{color:var(--carmine)}
+  .signature{margin-top:3rem;text-align:right;font-style:italic;color:var(--ink-soft)}
+  .lss-question{
+    font-family:'Josefin Sans',sans-serif;font-weight:200;
+    text-transform:uppercase;letter-spacing:.14em;line-height:1.9;
+    font-size:clamp(.95rem,2.2vw,1.25rem);
+    margin:2.6rem 0 0;
+  }
+
+  /* ---------- gallery ---------- */
+  #gallery{padding-top:calc(var(--nav-h) + env(safe-area-inset-top) + 3rem)}
+  .gallery-intro{padding-bottom:0}
+  .work{
+    max-width:860px;margin:0 auto;padding:4rem 0;
+    border-bottom:1px solid var(--hairline);
+  }
+  .work:last-of-type{border-bottom:none}
+  .work figure{margin:0}
+  .work .frame{
+    background:#fff;
+    padding:clamp(.7rem,2.5vw,1.6rem);
+    box-shadow:0 1px 2px rgba(43,35,37,.06),0 14px 44px -18px rgba(43,35,37,.18);
+  }
+  .work img{display:block;width:100%;height:auto}
+  .work figcaption{
+    margin-top:2rem;
+    display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem 2rem;
+    align-items:start;
+  }
+  .work .no{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    font-size:.66rem;letter-spacing:.34em;color:var(--carmine);
+    text-transform:uppercase;margin-bottom:.55rem;
+  }
+  .work h3{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    text-transform:uppercase;font-size:1.02rem;letter-spacing:.2em;
+    line-height:1.7;max-width:34ch;
+  }
+  .work .swatch{
+    width:28px;height:28px;border-radius:50%;
+    border:1px solid var(--hairline);margin-top:1.3rem;flex:none;
+  }
+  .work .meta{grid-column:1/-1;margin-top:1rem;max-width:var(--measure)}
+  .work .meta p{margin-bottom:.85rem}
+  .work .meta p:last-child{margin-bottom:0}
+  .work .dims{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .work .dedication{font-style:italic;color:var(--ink-soft)}
+
+  /* ---------- footer ---------- */
+  footer{
+    padding:4rem 1.5rem calc(3.5rem + env(safe-area-inset-bottom));text-align:center;
+    border-top:1px solid var(--hairline);
+  }
+  footer .hashline{
+    font-family:'Josefin Sans',sans-serif;font-weight:200;
+    text-transform:uppercase;letter-spacing:.3em;
+    font-size:clamp(.8rem,2.4vw,1.15rem);
+  }
+  footer .hashline .hash{color:var(--carmine)}
+  footer .credit{margin-top:1.4rem;font-style:italic;color:var(--ink-soft);font-size:1rem}
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none}}
+
+  @media(max-width:640px){
+    body{font-size:16.5px}
+    section{padding:3.5rem 1.1rem}
+    #gallery{padding-top:calc(var(--nav-h) + env(safe-area-inset-top) + 2rem)}
+    .work{padding:2.8rem 0}
+    .work figcaption{grid-template-columns:1fr}
+    .work .swatch{margin-top:.4rem}
+    .section-label{margin-bottom:2.2rem;font-size:.6rem;letter-spacing:.3em}
+  }
+
+  /* ---------- contact / about the artist ---------- */
+  .tabs .short{display:none}
+  #contact{padding-top:calc(var(--nav-h) + env(safe-area-inset-top) + 3rem)}
+  .artist{
+    display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+    gap:clamp(2rem,5vw,4.5rem);align-items:start;
+    max-width:900px;margin:0 auto;
+  }
+  .artist .portrait{
+    background:#fff;padding:clamp(.6rem,2vw,1.1rem);
+    box-shadow:0 1px 2px rgba(43,35,37,.06),0 14px 44px -18px rgba(43,35,37,.18);
+    position:sticky;top:calc(var(--nav-h) + env(safe-area-inset-top) + 2rem);
+  }
+  .artist .portrait img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+  .artist .portrait figcaption{
+    margin-top:.9rem;text-align:center;
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .artist h2{
+    font-family:'Josefin Sans',sans-serif;font-weight:200;
+    text-transform:uppercase;letter-spacing:.16em;line-height:1.35;
+    font-size:clamp(1.4rem,3.4vw,2.1rem);
+  }
+  .artist .creds{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--carmine);margin:.8rem 0 1.4rem;
+  }
+  .artist .roles{font-style:italic;color:var(--ink-soft);font-size:1.12rem;margin-bottom:2rem}
+  .artist .bio p{margin-bottom:1.3rem}
+  .artist .bio p:last-child{margin-bottom:0}
+  .contact-card{
+    background:var(--rose);margin-top:5rem;padding:clamp(2.4rem,6vw,4rem) 1.5rem;
+    text-align:center;
+  }
+  .contact-card .rule{width:52px;height:1px;background:var(--carmine);margin:0 auto 2rem}
+  .contact-card p.lead{font-style:italic;color:var(--ink-soft);font-size:1.12rem;max-width:40ch;margin:0 auto 1.6rem}
+  .contact-card .email{
+    display:inline-block;font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:clamp(1.35rem,4.2vw,2.2rem);color:var(--ink);text-decoration:none;
+    border-bottom:1px solid var(--carmine);padding-bottom:.15rem;overflow-wrap:anywhere;
+    transition:color .25s;
+  }
+  .contact-card .email:hover{color:var(--carmine)}
+  .contact-card .actions{margin-top:2.2rem;display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+  .pill{
+    font-family:'Josefin Sans',sans-serif;font-weight:300;
+    font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;
+    padding:.85rem 1.4rem;border-radius:999px;min-height:42px;display:inline-flex;align-items:center;
+    transition:background .25s,color .25s,border-color .25s;
+  }
+  .pill.solid{background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
+  .pill.solid:hover{background:var(--carmine);border-color:var(--carmine)}
+  .pill.line{color:var(--ink);border:1px solid var(--hairline)}
+  .pill.line:hover{border-color:var(--carmine);color:var(--carmine)}
+  @media(max-width:760px){
+    .artist{grid-template-columns:1fr}
+    .artist .portrait{position:static;max-width:340px;margin:0 auto;width:100%}
+    .artist .intro{text-align:center}
+  }
+  @media(max-width:640px){
+    #contact{padding-top:calc(var(--nav-h) + env(safe-area-inset-top) + 2rem)}
+    .contact-card{margin-top:3.5rem}
+  }
+  @media(max-width:520px){
+    .tabs{gap:.2rem}
+    .tabs .long{display:none}
+    .tabs .short{display:inline}
+    .tabs button{padding:.5rem .55rem;letter-spacing:.1em}
+    nav .mark{max-width:30vw}
+  }
